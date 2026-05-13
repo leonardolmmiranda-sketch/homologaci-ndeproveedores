@@ -162,7 +162,10 @@ footer{background:var(--yellow);border-top:2px solid var(--yellow-dark);padding:
 <div class="container" id="app"></div>
 <footer>
   <div class="footer-brand">Mercado Libre &#8212; MTM</div>
-  <div class="footer-note" id="footer-note"></div>
+  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px">
+    <div class="footer-note" id="footer-note"></div>
+    <div id="data-status" style="font-size:11px;opacity:0.7;color:var(--lav-deeper)">Carregando dados...</div>
+  </div>
 </footer>
 <script>
 var T = {
@@ -317,6 +320,7 @@ var DISCLAIMER = {
 
 var COMPRAS_LABEL = {pt: "D\u00favidas sobre pre\u00e7os ou negocia\u00e7\u00e3o? Fale com Compras:", es: "Consultas sobre precios o negociaci\u00f3n? Contacte a Compras:"};
 
+// Dados locais — fallback caso a API esteja indisponível
 var SHEET_DATA = {
   "Brasil": [], "Argentina": [],
   "M\u00e9xico": [
@@ -325,6 +329,38 @@ var SHEET_DATA = {
   ],
   "Chile": [], "Col\u00f4mbia": [], "Uruguai": []
 };
+
+var API_URL = "https://script.google.com/a/macros/mercadolivre.com/s/AKfycby4gtLve43trFmb0xVR1wRpDvgx_9MHwvHiaVwlmmFwo-R2hQyXgO_UGb98Vf2zeGCcPA/exec";
+var REFRESH_MS = 5 * 60 * 1000;
+
+function fetchData() {
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", API_URL, true);
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      try {
+        var data = JSON.parse(xhr.responseText);
+        SHEET_DATA = data;
+        render();
+        setStatus("ok");
+      } catch(e) { setStatus("err"); }
+    } else { setStatus("err"); }
+  };
+  xhr.onerror = function() { setStatus("err"); };
+  xhr.send();
+}
+
+function setStatus(s) {
+  var el = document.getElementById("data-status");
+  if (!el) return;
+  if (s === "ok") {
+    el.innerHTML = "&#10003; Dados atualizados da planilha";
+    el.style.color = "var(--green-dark)";
+  } else {
+    el.innerHTML = "&#9888; Usando dados locais";
+    el.style.color = "var(--orange)";
+  }
+}
 
 var lang = "pt", view = "countries", activeCountry = null, activeEq = null;
 
@@ -471,6 +507,8 @@ function goHome() { view="countries"; activeCountry=null; activeEq=null; render(
 updateStatic();
 render();
 updateHeaderBack();
+fetchData();
+setInterval(fetchData, REFRESH_MS);
 </script>
 </body>
 </html>
