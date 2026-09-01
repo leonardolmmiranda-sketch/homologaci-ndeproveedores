@@ -228,7 +228,18 @@ var EQS = [
   {key:"Baker de Volumoso",pt:"Baker de Volumoso",es:"Baker de Voluminoso",specs_pt:"Transporte de itens volumosos",specs_es:"Transporte de artículos voluminosos"},
   {key:"Baker de GM",pt:"Baker de GM",es:"Baker de GM",specs_pt:"General Merchandise",specs_es:"General Merchandise"},
   {key:"Baker de Frágil",pt:"Baker de Frágil",es:"Baker de Frágil",specs_pt:"Itens frágeis e delicados",specs_es:"Artículos frágiles y delicados"},
-  {key:"Carrito de Elevación Bulky",pt:"Carrinho de Elevação Bulky",es:"Carrito de Elevación Bulky",specs_pt:"Elevação de itens bulky",specs_es:"Elevación de artículos bulky"}
+  {key:"Carrito de Elevación Bulky",pt:"Carrinho de Elevação Bulky",es:"Carrito de Elevación Bulky",specs_pt:"Elevação de itens bulky",specs_es:"Elevación de artículos bulky"},
+  {key:"Escada Pallet High",pt:"Escada Pallet High",es:"Escalera Pallet High",specs_pt:"Acesso a paletes altos",specs_es:"Acceso a paletas altas"},
+  {key:"Suporte Sacas",pt:"Suporte Sacas",es:"Soporte Sacas",specs_pt:"Suporte para sacas",specs_es:"Soporte para sacas"},
+  {key:"BK com Portas para Sorter",pt:"BK com Portas para Sorter",es:"BK con Puertas para Sorter",specs_pt:"Baker com portas para sorter",specs_es:"Baker con puertas para sorter"},
+  {key:"Flowrack de Indução 2.0 - Manga",pt:"Flowrack de Indução 2.0 - Manga",es:"Flowrack de Inducción 2.0 - Manga",specs_pt:"Indução ergonômica 2.0",specs_es:"Inducción ergonómica 2.0"},
+  {key:"Esteira Manual Flex",pt:"Esteira Manual Flex",es:"Cinta Manual Flex",specs_pt:"Esteira manual flexível",specs_es:"Cinta manual flexible"},
+  {key:"Paletão",pt:"Paletão",es:"Paletón",specs_pt:"Pallet duplo/grande",specs_es:"Pallet doble/grande"},
+  {key:"Bastão Pallet High",pt:"Bastão Pallet High",es:"Bastón Pallet High",specs_pt:"Acessório para Pallet High",specs_es:"Accesorio para Pallet High"},
+  {key:"Rede de Proteção",pt:"Rede de Proteção",es:"Malla de Protección",specs_pt:"Proteção para jaulas/gaiolas",specs_es:"Protección para jaulas"},
+  {key:"Batente para Manga Pallet",pt:"Batente para Manga Pallet",es:"Tope para Manga Pallet",specs_pt:"Batente para manga de paletes",specs_es:"Tope para manga de paletas"},
+  {key:"Acessório Baker — Kit RSC",pt:"Acessório Baker — Kit RSC",es:"Accesorio Baker — Kit RSC",specs_pt:"Kit RSC acessório para Baker",specs_es:"Kit RSC accesorio para Baker"},
+  {key:"Saca Rafia",pt:"Saca Rafia",es:"Saco Rafia",specs_pt:"Insumo — saca de transporte",specs_es:"Insumo — saco de transporte"}
 ];
 var EQ_ALIASES = {
   "flow continuo":"Flow Contínuo","flow contínuo":"Flow Contínuo","tolva":"Tolva",
@@ -243,7 +254,42 @@ var EQ_ALIASES = {
   "baker de frágil":"Baker de Frágil","baker de fragil":"Baker de Frágil",
   "carrito de elevación bulky":"Carrito de Elevación Bulky",
   "carrito de elevacion bulky":"Carrito de Elevación Bulky",
-  "flow de voluminoso 2x0,8m (ajuste de altura)":"Flow de Voluminoso 2x0,8m"
+  "flow de voluminoso 2x0,8m (ajuste de altura)":"Flow de Voluminoso 2x0,8m",
+  "escada pallet high":"Escada Pallet High",
+  "escalera pallet high":"Escada Pallet High",
+  "suporte sacas":"Suporte Sacas",
+  "soporte sacas":"Suporte Sacas",
+  "bk com portas para sorter":"BK com Portas para Sorter",
+  "baker con puertas — sorter":"BK com Portas para Sorter",
+  "baker con puertas para sorter":"BK com Portas para Sorter",
+  "baker com portas para sorter":"BK com Portas para Sorter",
+  "flowrack de indução 2.0 - manga":"Flowrack de Indução 2.0 - Manga",
+  "flowrack de inducao 2.0 - manga":"Flowrack de Indução 2.0 - Manga",
+  "flowrack de indução 2.0":"Flowrack de Indução 2.0 - Manga",
+  "esteira manual flex":"Esteira Manual Flex",
+  "conveyor manual — flex":"Esteira Manual Flex",
+  "conveyor manual flex":"Esteira Manual Flex",
+  "cinta manual flex":"Esteira Manual Flex",
+  "paletao":"Paletão",
+  "paletão":"Paletão",
+  "double pallet":"Paletão",
+  "bastao pallet high":"Bastão Pallet High",
+  "bastão pallet high":"Bastão Pallet High",
+  "baston pallet high":"Bastão Pallet High",
+  "rede de protecao":"Rede de Proteção",
+  "rede de proteção":"Rede de Proteção",
+  "malla de proteccion para jaulas":"Rede de Proteção",
+  "malla de protección para jaulas":"Rede de Proteção",
+  "batente para manga pallet":"Batente para Manga Pallet",
+  "tope para manga paletas":"Batente para Manga Pallet",
+  "tope para manga pallet":"Batente para Manga Pallet",
+  "acessorio baker — kit rsc":"Acessório Baker — Kit RSC",
+  "acessório baker — kit rsc":"Acessório Baker — Kit RSC",
+  "accesorio baker — kit rsc":"Acessório Baker — Kit RSC",
+  "kit rsc":"Acessório Baker — Kit RSC",
+  "saca rafia":"Saca Rafia",
+  "saco rafia":"Saca Rafia",
+  "saca":"Saca Rafia"
 };
 var IC="#5B3AA8", IS="#D5D0F5", IM="#AFA9EC";
 function buildIcon(shapes) {
@@ -311,6 +357,64 @@ var ICONS = {
     rr(16,10,24,16,3,IC,null,null) +
     '<path d="M24 10l4-7 4 7" fill="'+IM+'"/>' +
     rc(18,48,5,IC) + rc(38,48,5,IC) + rc(18,48,2.5,"white") + rc(38,48,2.5,"white")
+  ),
+  "Escada Pallet High": buildIcon(
+    '<line x1="14" y1="6" x2="14" y2="50" stroke="'+IC+'" stroke-width="3"/>' +
+    '<line x1="42" y1="6" x2="42" y2="50" stroke="'+IC+'" stroke-width="3"/>' +
+    '<line x1="14" y1="14" x2="42" y2="14" stroke="'+IM+'" stroke-width="3"/>' +
+    '<line x1="14" y1="24" x2="42" y2="24" stroke="'+IM+'" stroke-width="3"/>' +
+    '<line x1="14" y1="34" x2="42" y2="34" stroke="'+IM+'" stroke-width="3"/>' +
+    '<line x1="14" y1="44" x2="42" y2="44" stroke="'+IM+'" stroke-width="3"/>'
+  ),
+  "Suporte Sacas": buildIcon(
+    '<path d="M18 40 V16 M38 40 V16" stroke="'+IC+'" stroke-width="2.5" stroke-linecap="round"/>' +
+    '<path d="M14 16h28" stroke="'+IC+'" stroke-width="2.5" stroke-linecap="round"/>' +
+    '<path d="M20 18c0 10 3 20 8 20s8-10 8-20" fill="'+IS+'" stroke="'+IM+'" stroke-width="1.2"/>' +
+    rr(8,42,40,4,2,IC,null,null)
+  ),
+  "BK com Portas para Sorter": buildIcon(
+    rr(8,12,40,26,3,IS,IC,"1.5") +
+    '<line x1="28" y1="12" x2="28" y2="38" stroke="'+IC+'" stroke-width="1.3"/>' +
+    rc(24,25,1.5,IC) + rc(32,25,1.5,IC) +
+    rc(16,45,5,IC) + rc(40,45,5,IC) + rc(16,45,2.5,"white") + rc(40,45,2.5,"white")
+  ),
+  "Flowrack de Indução 2.0 - Manga": buildIcon(
+    rr(6,20,44,10,3,IS,null,null) + rr(6,34,44,10,3,IS,null,null) +
+    '<path d="M18 8h20l-4 10h-12z" fill="'+IM+'"/>'
+  ),
+  "Esteira Manual Flex": buildIcon(
+    '<path d="M6 30c8-10 16 10 24 0s16-10 20 0" stroke="'+IC+'" stroke-width="3" fill="none" stroke-linecap="round"/>' +
+    rc(14,30,3,IM) + rc(28,22,3,IM) + rc(42,30,3,IM)
+  ),
+  "Paletão": buildIcon(
+    rr(6,12,44,14,3,IS,IC,"1.5") + rr(6,30,44,14,3,IS,IC,"1.5") +
+    '<line x1="6" y1="19" x2="50" y2="19" stroke="'+IM+'" stroke-width="1"/>' +
+    '<line x1="6" y1="37" x2="50" y2="37" stroke="'+IM+'" stroke-width="1"/>'
+  ),
+  "Bastão Pallet High": buildIcon(
+    '<line x1="28" y1="8" x2="28" y2="48" stroke="'+IC+'" stroke-width="4" stroke-linecap="round"/>' +
+    rc(28,8,4,IM)
+  ),
+  "Rede de Proteção": buildIcon(
+    rr(6,10,44,36,4,IS,IC,"1.5") +
+    '<line x1="6" y1="19" x2="50" y2="19" stroke="'+IM+'" stroke-width="1"/>' +
+    '<line x1="6" y1="28" x2="50" y2="28" stroke="'+IM+'" stroke-width="1"/>' +
+    '<line x1="6" y1="37" x2="50" y2="37" stroke="'+IM+'" stroke-width="1"/>' +
+    '<line x1="17" y1="10" x2="17" y2="46" stroke="'+IM+'" stroke-width="1"/>' +
+    '<line x1="28" y1="10" x2="28" y2="46" stroke="'+IM+'" stroke-width="1"/>' +
+    '<line x1="39" y1="10" x2="39" y2="46" stroke="'+IM+'" stroke-width="1"/>'
+  ),
+  "Batente para Manga Pallet": buildIcon(
+    rr(8,30,40,14,3,IS,IC,"1.5") +
+    rr(24,14,8,18,2,IC,null,null)
+  ),
+  "Acessório Baker — Kit RSC": buildIcon(
+    rr(12,14,32,28,4,IS,IC,"1.5") +
+    '<path d="M28 22v12M22 28h12" stroke="'+IC+'" stroke-width="2.5" stroke-linecap="round"/>'
+  ),
+  "Saca Rafia": buildIcon(
+    '<path d="M18 14h20l4 8-6 24H20l-6-24z" fill="'+IS+'" stroke="'+IC+'" stroke-width="1.5"/>' +
+    '<path d="M24 14c0-4 2-6 4-6s4 2 4 6" stroke="'+IC+'" stroke-width="2" fill="none"/>'
   )
 };
 var COMPRAS = {
